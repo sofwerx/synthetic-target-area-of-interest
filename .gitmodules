@@ -1,0 +1,3 @@
+[submodule "triangulator"]
+	path = triangulator
+	url = https://github.com/sofwerx/synthetic-target-triangulator
