@@ -1,3 +1,9 @@
 [submodule "triangulator"]
 	path = triangulator
 	url = https://github.com/sofwerx/synthetic-target-triangulator
+[submodule "target-line-of-sight"]
+	path = target-line-of-sight
+	url = https://github.com/sofwerx/synthetic-target-line-of-sight
+[submodule "get-webRTC-sensor-data"]
+	path = get-webRTC-sensor-data
+	url = https://github.com/sofwerx/orient
