@@ -10,3 +10,9 @@
 [submodule "ws"]
 	path = ws
 	url = https://github.com/sofwerx/synthetic-target-websvcs
+[submodule "lib/swx/target-line-of-bearing"]
+	path = lib/swx/target-line-of-bearing
+	url = https://github.com/sofwerx/synthetic-target-line-of-bearing
+[submodule "lib/swx/triangulator"]
+	path = lib/swx/triangulator
+	url = https://github.com/sofwerx/synthetic-target-triangulator
