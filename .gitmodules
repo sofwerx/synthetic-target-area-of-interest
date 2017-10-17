@@ -10,3 +10,6 @@
 [submodule "lib/swx/triangulator"]
 	path = lib/swx/triangulator
 	url = https://github.com/sofwerx/synthetic-target-triangulator
+[submodule "lib/swx/object_lob"]
+	path = lib/swx/object_lob
+	url = https://github.com/sofwerx/synthetic-target-line-of-bearing
