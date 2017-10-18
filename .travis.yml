@@ -1,0 +1,11 @@
+sudo: required
+services:
+  - docker
+language: bash
+before_install:
+  - pip install -g @mumbacloud/dmport
+script:
+  - ./build.sh
+branches:
+  only:
+    - master
