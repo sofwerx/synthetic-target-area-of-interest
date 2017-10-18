@@ -3,8 +3,9 @@ services:
   - docker
 language: bash
 before_install:
-  - pip install @mumbacloud/dmport
-  - export PATH=$PWD/node_modules/.bin:$PATH
+  - apt-get update
+  - apt-get install -y npm
+  - npm install -g @mumbacloud/dmport
 script:
   - ./build.sh
 branches:
