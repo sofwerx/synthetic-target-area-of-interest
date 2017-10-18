@@ -4,10 +4,8 @@ services:
 language: bash
 before_install:
   - sudo apt-get -qq update
-  - sudo apt-get -qq install -y npm
-  - mkdir -p ~/.ssh ; echo "StrictHostKeyChecking no" >> ~/.ssh/.config
-  - sudo npm install -g @mumbacloud/dmport
-  - docker ps -a
+  - sudo apt-get install -y -q npm
+  - sudo npm install -g https://github.com/mumba/dmport
 script:
   - ./build.sh
 branches:
