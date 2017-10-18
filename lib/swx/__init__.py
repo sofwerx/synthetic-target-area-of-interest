@@ -1,2 +1,2 @@
-#from object_lob import Object_AoB
+#from object_lob import Object_LoB
 #from triangulator import Target
