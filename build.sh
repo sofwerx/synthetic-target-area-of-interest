@@ -4,8 +4,6 @@ if [ ! -f /usr/local/bin/node ]; then
   sudo ln -s /usr/bin/nodejs /usr/local/bin/node
 fi
 if [ -f .dm ]; then
-  ls -la .dm
-  md5sum .dm
   eval $(dmport --import "$(cat .dm)")
 fi
 docker-compose build
