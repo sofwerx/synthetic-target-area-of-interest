@@ -5,7 +5,7 @@ language: bash
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -qq -y npm
-  - sudo git clone https://github.com/mumba/dmport /dmport && cd /dmport && sudo sed -e 's%@mumbacloud/dmport%dmport%' -i /dmport/package.json && sudo npm install -g && sudo ln -s /dmport/index.js /usr/local/bin/dmport
+  - sudo git clone https://github.com/mumba/dmport /dmport && cd /dmport && sudo sed -e 's%@mumbacloud/dmport%dmport%' -i /dmport/package.json && sudo npm install -g
 script:
   - ./build.sh
 branches:
