@@ -28,6 +28,7 @@ services:
       - "8000:8000"
     environment:
       NVIDIA_VISIBLE_DEVICES: all
+      HOST: ${HOST}
     logging:
       driver: json-file
       options: 
