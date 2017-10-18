@@ -5,7 +5,7 @@ language: bash
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -qq -y npm
-  - git clone https://github.com/mumba/dmport /dmport && cd /dmport && npm install -g && ln -s /dmport/index.js /usr/local/bin/dmport
+  - sudo git clone https://github.com/mumba/dmport /dmport && cd /dmport && npm install -g && sudo ln -s /dmport/index.js /usr/local/bin/dmport
 script:
   - ./build.sh
 branches:
