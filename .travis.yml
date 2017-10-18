@@ -8,10 +8,7 @@ before_install:
 - sudo apt-get -qq update
 - curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 - sudo apt-get install -y nodejs
-- sudo npm install -y @mumbacloud/dmport
-#- sudo git clone https://github.com/mumba/dmport /dmport && (cd /dmport && sudo sed
-#  -e 's%@mumbacloud/dmport%dmport%' -i /dmport/package.json && sudo npm install -g
-#  )
+- sudo npm install -g @mumbacloud/dmport
 script:
 - "./build.sh"
 branches:
