@@ -5,6 +5,7 @@ language: bash
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get -qq install -y npm
+  - ssh -o StrictHostKeyChecking=no git@github.com
   - sudo npm install -g @mumbacloud/dmport
   - docker ps -a
 script:
