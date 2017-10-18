@@ -1,0 +1,35 @@
+version: '2'
+
+volumes:
+  nvidia_driver:
+    external:
+      name: "nvidia_driver_384.81"
+
+services:
+
+  staoi:
+    container_name: staoi
+    hostname: staoi
+    build:
+      context: .
+      dockerfile: Dockerfile.ppc64le
+    image: sofwerx/staoi:ppc64le
+    volumes:
+      - nvidia_driver:/usr/local/nvidia:ro
+    devices:
+      - /dev/nvidia0
+      - /dev/nvidia1
+      - /dev/nvidia2
+      - /dev/nvidia3
+      - /dev/nvidiactl
+      - /dev/nvidia-uvm
+      - /dev/nvidia-uvm-tools
+    ports:
+      - "8000:8000"
+    environment:
+      NVIDIA_VISIBLE_DEVICES: all
+    logging:
+      driver: json-file
+      options: 
+        max-size: "20k"
+
