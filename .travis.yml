@@ -3,7 +3,8 @@ services:
   - docker
 language: bash
 before_install:
-  - pip install -g @mumbacloud/dmport
+  - pip install @mumbacloud/dmport
+  - export PATH=$PWD/node_modules/.bin:$PATH
 script:
   - ./build.sh
 branches:
