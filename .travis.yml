@@ -3,9 +3,10 @@ services:
   - docker
 language: bash
 before_install:
-  - sudo apt-get update
-  - sudo apt-get install -y npm
+  - sudo apt-get -qq update
+  - sudo apt-get -qq install -y npm
   - sudo npm install -g @mumbacloud/dmport
+  - docker ps -a
 script:
   - ./build.sh
 branches:
