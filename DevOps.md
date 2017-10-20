@@ -2,6 +2,8 @@
 
 ## travis-ci auto-build and deploy
 
+[![Build Status](https://travis-ci.org/sofwerx/synthetic-target-area-of-interest)](https://travis-ci.org/sofwerx/synthetic-target-area-of-interest)
+
 The `.travis.yml` in this project runs the `build.sh` script to do a `docker-compose` to a ppc64le docker host with GPUs.
 
 The `.dm.enc` file in this project is a travis encrypted version of the `.dm` file:
