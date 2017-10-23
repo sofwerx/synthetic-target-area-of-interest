@@ -10,3 +10,6 @@
 [submodule "lib/swx/object_lob"]
 	path = lib/swx/object_lob
 	url = https://github.com/sofwerx/synthetic-target-line-of-bearing
+[submodule "orient"]
+	path = orient
+	url = git@github.com:sofwerx/orient.git
