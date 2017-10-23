@@ -135,8 +135,6 @@ ADD . /staoi
 
 WORKDIR /staoi
 
-RUN git submodule update --init --recursive
-
 WORKDIR ws/
 
 EXPOSE 8000
