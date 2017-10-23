@@ -36,7 +36,28 @@ services:
     labels:
       - "traefik.backend=staoi"
       - "traefik.port=8000"
-      - "traefik.frontend.rule=Host:staoi.swx-gpu.devwerx.org"
+      - "traefik.frontend.rule=Host:${STAOI_HOST}"
+      - "traefik.frontend.passHostHeader=true"
+      - "traefik.frontend.entryPoints=http,https"
+
+  orient:
+    build: orient/
+    image: sofwerx/orient
+    restart: always
+    container_name: orient
+    hostname: orient
+    environment:
+      PEER_CONFIG: "${PEER_CONFIG}"
+      NIFI_CONFIG: "{ enabled: false, url: '/nifi' }"
+#      STAOI_URL: "https://${STAOI_HOST}:8000"
+      SECURE_PORT: 443
+      HTTP_PORT: 9999
+    ports:
+      - 9999:9999
+    labels:
+      - "traefik.backend=orient"
+      - "traefik.port=9999"
+      - "traefik.frontend.rule=Host:${ORIENT_HOST}"
       - "traefik.frontend.passHostHeader=true"
       - "traefik.frontend.entryPoints=http,https"
 
