@@ -5,6 +5,11 @@ volumes:
     external:
       name: "nvidia_driver_384.81"
 
+networks:
+  default:
+    external:
+      name: swxgpu_default
+
 services:
 
   staoi:
