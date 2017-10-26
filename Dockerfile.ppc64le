@@ -113,6 +113,8 @@ ADD requirements.txt /staoi/requirements.txt
 RUN pip install -r /staoi/requirements.txt
 
 # Install curl
+RUN sed -i -e 's/^.*security/#/' /etc/apt/sources.list
+RUN apt-get update
 RUN apt-get install -y curl
 
 RUN curl -sL -o /anaconda.sh https://repo.continuum.io/archive/Anaconda2-5.0.0-Linux-ppc64le.sh
