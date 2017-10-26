@@ -57,7 +57,7 @@ services:
       STAOI_URL: "http://staoi:8000"
       OBJLOB_CONFIG: "{ enabled: true, url: 'http://${STAOI_HOST}:8000/GetObjectLoB' }"
       TRIANGULATE_CONFIG: "{ enabled: true, url: 'http://${STAOI_HOST}:8000/LocateTarget' }"
-#      SECURE_PORT: 443
+      SECURE_PORT: 443
       HTTP_PORT: 9999
     ports:
       - 9999:9999
