@@ -3,9 +3,9 @@ TMPDIR := $(shell mktemp -d)
 requirements.txt: */*.py */*/*.py */*/*/*.py
 	pip install virtualenv pipreqs
 	pipreqs . --force
-	virtualenv $(TMPDIR)/cybertick
+	virtualenv $(TMPDIR)/staoi
 	[ -n "$(TMPDIR)" -a -d $(TMPDIR) ]
-	. $(TMPDIR)/cybertick/bin/activate \
+	. $(TMPDIR)/staoi/bin/activate \
 		&& pip install -r $@ \
 		&& pip freeze > $@ \
 		&& deactivate \
