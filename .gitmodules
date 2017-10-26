@@ -1,6 +1,3 @@
-[submodule "get-webRTC-sensor-data"]
-	path = get-webRTC-sensor-data
-	url = https://github.com/sofwerx/orient
 [submodule "ws"]
 	path = ws
 	url = https://github.com/sofwerx/synthetic-target-websvcs
@@ -12,4 +9,4 @@
 	url = https://github.com/sofwerx/synthetic-target-line-of-bearing
 [submodule "orient"]
 	path = orient
-	url = git@github.com:sofwerx/orient.git
+	url = https://github.com/sofwerx/orient

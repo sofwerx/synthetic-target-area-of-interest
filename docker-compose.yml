@@ -27,11 +27,11 @@ services:
     ports:
       - "8000:8000"
     environment:
-      NVIDIA_VISIBLE_DEVICES: all
+      CUDA_VISIBLE_DEVICES: "2,3"
       HOST: ${HOST}
     logging:
       driver: json-file
-      options: 
+      options:
         max-size: "20k"
     labels:
       - "traefik.backend=staoi"
@@ -49,7 +49,9 @@ services:
     environment:
       PEER_CONFIG: "${PEER_CONFIG}"
       NIFI_CONFIG: "{ enabled: false, url: '/nifi' }"
-#      STAOI_URL: "http://${STAOI_HOST}:8080"
+      STAOI_URL: "http://staoi:8000"
+      OBJLOB_CONFIG: "{ enabled: true, url: 'http://${STAOI_HOST}:8000/GetObjectLoB' }"
+      TRIANGULATE_CONFIG: "{ enabled: true, url: 'http://${STAOI_HOST}:8000/LocateTarget' }"
       SECURE_PORT: 443
       HTTP_PORT: 9999
     ports:
