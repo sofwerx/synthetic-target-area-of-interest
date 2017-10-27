@@ -164,6 +164,9 @@ RUN pip install --upgrade protobuf
 #RUN ln -nsf /models/research/object_detection/utils lib/swx/object_lob/utils
 
 # ADD synthetic-target-area-of-interest
+
+ENV PYTHONPATH=$PYTHONPATH:/staoi/ws:/staoi/lib
+
 ADD . /staoi
 
 EXPOSE 8000
