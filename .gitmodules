@@ -10,3 +10,6 @@
 [submodule "orient"]
 	path = orient
 	url = https://github.com/sofwerx/orient
+[submodule "lib/swx/cot"]
+	path = lib/swx/cot
+	url = git@github.com:sofwerx/push-cursor-on-target.git
