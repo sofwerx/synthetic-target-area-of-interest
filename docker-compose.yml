@@ -1,6 +1,9 @@
 version: '2'
 
-#volumes:
+volumes:
+  traefik-ssl:
+    external:
+      name: "geo_traefik-ssl"
 #  nvidia_driver:
 #    external:
 #      name: "nvidia_driver_384.81"
@@ -8,8 +11,8 @@ version: '2'
 networks:
   default:
     external:
-#      name: swxgpu_default
       name: geo_default
+#      name: swxgpu_default
 
 services:
 
@@ -62,6 +65,9 @@ services:
       PUSHCOT_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}/PushCoT/' }"
       SECURE_PORT: 443
       HTTP_PORT: 9999
+    depends_on:
+    - turn
+    - staoi
     ports:
       - 9999:9999
     labels:
@@ -85,6 +91,8 @@ services:
       - "5350:5350/udp" # STUN/TURN DTLS Alt port (RFC5780 support)
       - "5350:5350/tcp" # STUN/TURN TLS Alt port (RFC5780 support)
       - "49152:49252/udp" # UDP media ports for TURN relay
+    volumes:
+     - traefik-ssl:/ssl
     environment:
       PUBLIC_IP: ${PUBLIC_IP}
       PORT: 3478
