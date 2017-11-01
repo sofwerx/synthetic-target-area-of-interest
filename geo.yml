@@ -1,0 +1,33 @@
+version: '2'
+
+volumes:
+  traefik-ssl:
+    external:
+      name: "geo_traefik-ssl"
+
+networks:
+  default:
+    external:
+      name: geo_default
+
+services:
+
+  staoi:
+    extends:
+      file: docker-compose.yml
+      service: staoi
+    build:
+      context: .
+      dockerfile: Dockerfile.x86_64
+    image: sofwerx/staoi:x86_64
+
+  orient:
+    extends:
+      file: docker-compose.yml
+      service: orient
+
+  turn:
+    extends:
+      file: docker-compose.yml
+      service: turn
+
