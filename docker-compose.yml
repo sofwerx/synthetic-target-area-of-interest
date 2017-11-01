@@ -42,7 +42,7 @@ services:
     logging:
       driver: json-file
       options:
-        max-size: "20k"
+        max-size: "20m"
     labels:
       - "traefik.backend=staoi"
       - "traefik.port=8000"
@@ -63,7 +63,7 @@ services:
       OBJLOB_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}/GetObjectLoB/' }"
       TRIANGULATE_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}/LocateTarget/' }"
       PUSHCOT_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}/PushCoT/' }"
-      MEDIA_CONFIG: '{ audio: false, video: { width: { min: 640, max: 1920 }, height: { min: 480, max: 1080 }, frameRate: { ideal: 5 }, facingMode: { ideal: "environment" } } }'
+      MEDIA_CONFIG: '{ audio: true, video: { width: { min: 640, max: 1920 }, height: { min: 480, max: 1080 }, frameRate: { ideal: 5 }, facingMode: { ideal: "environment" } } }'
       SECURE_PORT: 443
       HTTP_PORT: 9999
     depends_on:
@@ -71,6 +71,10 @@ services:
     - staoi
     ports:
       - 9999:9999
+    logging:
+      driver: json-file
+      options:
+        max-size: "20m"
     labels:
       - "traefik.backend=orient"
       - "traefik.port=9999"
@@ -108,6 +112,10 @@ services:
       #WILDCARD_SSL_CA_CHAIN: ${WILDCARD_SSL_CA_CHAIN}
       #WILDCARD_SSL_PRIVATE_KEY: ${WILDCARD_SSL_PRIVATE_KEY}
       #WILDCARD_SSL_CERTIFICATE: ${WILDCARD_SSL_CERTIFICATE}
+    logging:
+      driver: json-file
+      options:
+        max-size: "20m"
     labels:
       - "traefik.enable=false"
 
