@@ -54,7 +54,7 @@ services:
     container_name: orient
     hostname: orient
     environment:
-      PEER_CONFIG: "${PEER_CONFIG}"
+      PEER_CONFIG: "{'iceServers': [ { url: 'turn:user@turn.${DNS_DOMAIN}:3478', username: 'user', credential: '${TURN_PASSWORD}' } ]}"
       NIFI_CONFIG: "{ enabled: false, url: '/nifi' }"
       STAOI_URL: "http://staoi:8000"
       OBJLOB_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}/GetObjectLoB/' }"
@@ -70,3 +70,35 @@ services:
       - "traefik.frontend.rule=Host:${ORIENT_HOST}"
       - "traefik.frontend.passHostHeader=true"
       - "traefik.frontend.entryPoints=http,https"
+
+  turn:
+    build: coturn
+    image: sofwerx/coturn:${ARCH}
+    restart: always
+    ports:
+      - "3478:3478/udp" # STUN/TURN UDP
+      - "3478:3478/tcp" # STUN/TURN TCP
+      - "3479:3479/udp" # STUN/TURN UDP Alt port (RFC5780 support)
+      - "3479:3479/tcp" # STUN/TURN TCP Alt port (RFC5780 support)
+      - "5349:5349/udp" # STUN/TURN DTLS
+      - "5349:5349/tcp" # STUN/TURN TLS
+      - "5350:5350/udp" # STUN/TURN DTLS Alt port (RFC5780 support)
+      - "5350:5350/tcp" # STUN/TURN TLS Alt port (RFC5780 support)
+      - "49152:49252/udp" # UDP media ports for TURN relay
+    environment:
+      PUBLIC_IP: ${PUBLIC_IP}
+      PORT: 3478
+      ALT_PORT: 3479
+      TLS_PORT: 5349
+      TLS_ALT_PORT: 5350
+      MIN_PORT: 49152
+      MAX_PORT: 49252
+      TURNCREDENTIALS_SECRET: ${TURN_PASSWORD}
+      DNS_DOMAIN: ${DNS_DOMAIN}
+      JSON_CONFIG: "{\"config\":[\"verbose\",\"fingerprint\",\"lt-cred-mech\",\"user=user:${TURN_PASSWORD}\",\"realm=turn.${DNS_DOMAIN}\"]}"
+      #WILDCARD_SSL_CA_CHAIN: ${WILDCARD_SSL_CA_CHAIN}
+      #WILDCARD_SSL_PRIVATE_KEY: ${WILDCARD_SSL_PRIVATE_KEY}
+      #WILDCARD_SSL_CERTIFICATE: ${WILDCARD_SSL_CERTIFICATE}
+    labels:
+      - "traefik.enable=false"
+
