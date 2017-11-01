@@ -33,6 +33,8 @@ services:
     environment:
       CUDA_VISIBLE_DEVICES: "0"
 #      CUDA_VISIBLE_DEVICES: "2,3"
+      ATAK_IP: 172.18.0.1
+      ATAK_PORT: 4242
 
   orient:
     extends:
