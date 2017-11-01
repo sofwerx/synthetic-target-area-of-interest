@@ -169,6 +169,19 @@ RUN pip install --upgrade protobuf
 
 ENV PYTHONPATH=$PYTHONPATH:/staoi/ws:/staoi/lib
 
+RUN apt-get install -y wget
+
+RUN git clone https://github.com/sofwerx/darknet.git /darknet
+
+RUN cd /darknet \
+ && wget https://pjreddie.com/media/files/yolo.weights
+
+RUN cd /darknet \
+ && sed -i -e 's/^GPU=0/GPU=1/' -e 's/^CUDNN=0/CUDNN=1/' Makefile \
+ && make
+
+RUN false
+
 ADD . /staoi
 
 EXPOSE 8000
