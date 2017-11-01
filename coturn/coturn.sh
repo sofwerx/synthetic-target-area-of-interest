@@ -32,18 +32,42 @@ if [ -n "${JSON_CONFIG}" ]; then
   echo "${JSON_CONFIG}" | jq -r '.config[]' >> ${TURNSERVER_CONFIG}-template
 fi
 
+enable_tls=0
 if [ -n "$WILDCARD_SSL_CERTIFICATE" ]; then
   echo "$WILDCARD_SSL_CA_CHAIN" | base64 -d > /app/etc/turn_server_ca.pem
   echo "$WILDCARD_SSL_CERTIFICATE" | base64 -d  > /app/etc/turn_server_cert.pem
   echo "$WILDCARD_SSL_PRIVATE_KEY" | base64 -d  > /app/etc/turn_server_pkey.pem
+  enable_tls=1
+fi
 
+if [ -f /ssl/acme.json ]; then
+  jq -r .DomainsCertificate.Certs[0].Certificate.PrivateKey /ssl/acme.json   | base64 -d  > /app/etc/turn_server_pkey.pem
+  jq -r .DomainsCertificate.Certs[0].Certificate.Certificate /ssl/acme.json   | base64 -d  > /app/etc/turn_server_cert.pem
+  enable_tls=1
+fi
+
+if [ $enable_tls -eq 1 ] ; then
   cat <<EOT >> ${TURNSERVER_CONFIG}-template
 tls-listening-port=${TLS_PORT}
 alt-tls-listening-port=${TLS_ALT_PORT}
 cert=/app/etc/turn_server_cert.pem
 pkey=/app/etc/turn_server_pkey.pem
 EOT
+fi
 
+if [ ! -f /app/etc/turn_server_ca.pem ] ; then
+  (
+    curl -sL https://letsencrypt.org/certs/isrgrootx1.pem.txt
+    curl -sL https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem.txt
+    curl -sL https://letsencrypt.org/certs/letsencryptauthorityx3.pem.txt
+    curl -sL https://letsencrypt.org/certs/lets-encrypt-x4-cross-signed.pem.txt
+    curl -sL https://letsencrypt.org/certs/letsencryptauthorityx4.pem.txt
+    curl -sL https://letsencrypt.org/certs/lets-encrypt-x2-cross-signed.pem.txt
+    curl -sL https://letsencrypt.org/certs/letsencryptauthorityx2.pem.txt
+    curl -sL https://letsencrypt.org/certs/lets-encrypt-x1-cross-signed.pem.txt
+    curl -sL https://letsencrypt.org/certs/letsencryptauthorityx1.pem.txt
+    curl -sL https://letsencrypt.org/certs/isrg-root-ocsp-x1.pem.txt
+  ) > /app/etc/turn_server_ca.pem
 fi
 
 envsubst < ${TURNSERVER_CONFIG}-template > ${TURNSERVER_CONFIG}
