@@ -63,6 +63,7 @@ services:
       OBJLOB_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}/GetObjectLoB/' }"
       TRIANGULATE_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}/LocateTarget/' }"
       PUSHCOT_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}/PushCoT/' }"
+      MEDIA_CONFIG: '{ audio: false, video: { width: { min: 640, max: 1920 }, height: { min: 480, max: 1080 }, frameRate: { ideal: 5 }, facingMode: { ideal: "environment" } } }'
       SECURE_PORT: 443
       HTTP_PORT: 9999
     depends_on:
