@@ -32,12 +32,14 @@ services:
       - /dev/nvidia-uvm-tools
     environment:
       CUDA_VISIBLE_DEVICES: "0"
-##      CUDA_VISIBLE_DEVICES: "2,3"
+#      CUDA_VISIBLE_DEVICES: "2,3"
 
   orient:
     extends:
       file: docker-compose.yml
       service: orient
+    environment:
+      REFRESH_CONFIG: '{ triangulate: 500 }'
 
   turn:
     extends:

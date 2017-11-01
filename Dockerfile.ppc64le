@@ -180,8 +180,6 @@ RUN cd /darknet \
  && sed -i -e 's/^GPU=0/GPU=1/' -e 's/^CUDNN=0/CUDNN=1/' Makefile \
  && make
 
-RUN false
-
 ADD . /staoi
 
 EXPOSE 8000
