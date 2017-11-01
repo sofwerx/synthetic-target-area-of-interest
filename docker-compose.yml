@@ -6,7 +6,7 @@ services:
     container_name: staoi
     hostname: staoi
     build:
-      context: coturn/
+      context: .
       dockerfile: Dockerfile.x86_64
     image: sofwerx/staoi:x86_64
     ports:
@@ -55,8 +55,12 @@ services:
       - "traefik.frontend.entryPoints=http,https"
 
   turn:
-    build: coturn
-    image: sofwerx/coturn:${ARCH}
+    container_name: turn
+    hostname: turn
+    build:
+      context: coturn/
+      dockerfile: Dockerfile.x86_64
+    image: sofwerx/turn:x86_64
     restart: always
     ports:
       - "3478:3478/udp" # STUN/TURN UDP
