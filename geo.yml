@@ -25,6 +25,8 @@ services:
     extends:
       file: docker-compose.yml
       service: orient
+    environment:
+      REFRESH_CONFIG: '{ triangulate: 2000 }'
 
   turn:
     extends:
