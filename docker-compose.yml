@@ -20,9 +20,9 @@ services:
     container_name: staoi
     hostname: staoi
     build:
-      context: .
-      dockerfile: Dockerfile.${ARCH}
-    image: sofwerx/staoi:${ARCH}
+      context: coturn/
+      dockerfile: Dockerfile.x86_64
+    image: sofwerx/staoi:x86_64
 #    volumes:
 #      - nvidia_driver:/usr/local/nvidia:ro
 #    devices:
@@ -66,9 +66,6 @@ services:
       MEDIA_CONFIG: '{ audio: true, video: { width: { min: 640, max: 1920 }, height: { min: 480, max: 1080 }, frameRate: { ideal: 5 }, facingMode: { ideal: "environment" } } }'
       SECURE_PORT: 443
       HTTP_PORT: 9999
-    depends_on:
-    - turn
-    - staoi
     ports:
       - 9999:9999
     logging:
@@ -96,8 +93,6 @@ services:
       - "5350:5350/udp" # STUN/TURN DTLS Alt port (RFC5780 support)
       - "5350:5350/tcp" # STUN/TURN TLS Alt port (RFC5780 support)
       - "49152:49252/udp" # UDP media ports for TURN relay
-    volumes:
-     - traefik-ssl:/ssl
     environment:
       PUBLIC_IP: ${PUBLIC_IP}
       PORT: 3478

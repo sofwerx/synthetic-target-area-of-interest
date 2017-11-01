@@ -30,4 +30,6 @@ services:
     extends:
       file: docker-compose.yml
       service: turn
+    volumes:
+     - traefik-ssl:/ssl
 

@@ -43,4 +43,8 @@ services:
     extends:
       file: docker-compose.yml
       service: turn
+    build:
+      context: coturn/
+      dockerfile: Dockerfile.ppc64le
+    image: sofwerx/turn:ppc64le
 
