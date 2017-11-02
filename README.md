@@ -20,13 +20,13 @@ Open up one browser tab as an admin, and open three more browser tabs as drones,
 
 There are presently two deployments of this project here at Sofwerx. These are both submodule deployed through our [swx-devops](https://github.com/sofwerx/swx-devops) repo harness:
 
-- [geo](https://github.com/sofwerx/swx-devops/tree/master/local/geo)
-- [swx-gpu](https://github.com/sofwerx/swx-devops/tree/master/local/swx-gpu)
+- [github.com/sofwerx/swx-devops/local/geo](https://github.com/sofwerx/swx-devops/tree/master/local/geo)
+- [github.com/sofwerx/swx-devops/local/swx-gpu](https://github.com/sofwerx/swx-devops/tree/master/local/swx-gpu)
 
 This is deployed using `docker-compose`, with the `.yml` file appropriate for each environment:
 
-- [geo](geo.yml)
-- [swx-gpu](swx-gpu.yml)
+- [geo.yml](geo.yml)
+- [swx-gpu.yml](swx-gpu.yml)
 
 ## Containers
 
