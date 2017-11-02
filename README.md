@@ -40,7 +40,7 @@ Beyond this, there are 3 containers that comprise this solution:
 
 ### orient
 
-The [orient](orient/) is a git submodule inclusion of the [github.com/sofwerx/orient](https://github.com/sofwerx/orient) repository.
+[orient](orient/) is a git submodule inclusion of the [github.com/sofwerx/orient](https://github.com/sofwerx/orient) repository.
 
 This is a Node.js web service for the drone/admin web interface that offers a [peerjs](http://peerjs.com/) service for mutual discovery.
 
