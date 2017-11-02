@@ -6,7 +6,7 @@ volumes:
       name: "geo_traefik-ssl"
 
 networks:
-  default:
+  geo_default:
     external:
       name: geo_default
 
@@ -20,6 +20,8 @@ services:
       context: .
       dockerfile: Dockerfile.x86_64
     image: sofwerx/staoi:x86_64
+    networks:
+     - geo_default
 
   orient:
     extends:
@@ -27,6 +29,8 @@ services:
       service: orient
     environment:
       REFRESH_CONFIG: '{ triangulate: 2000 }'
+    networks:
+     - geo_default
 
   turn:
     extends:
@@ -34,4 +38,6 @@ services:
       service: turn
     volumes:
      - traefik-ssl:/ssl
+    networks:
+     - geo_default
 
