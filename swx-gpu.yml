@@ -4,6 +4,9 @@ volumes:
   nvidia_driver:
     external:
       name: "nvidia_driver_384.81"
+  traefik-ssl:
+    external:
+      name: "swxgpu_traefik-ssl"
 
 networks:
   swxgpu_default:
