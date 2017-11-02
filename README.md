@@ -1,6 +1,32 @@
 # synthetic-target-area-of-interest
+
 Identify and geolocate object(s) of interest using imagery and sensor data from multiple UAVs viewing a common target area, add / update corresponding feature on GIS map layer.
 
+## Environments
+
+There are presently two deployments of this project here at Sofwerx. These are both submodule deployed through our [swx-devops](https://github.com/sofwerx/swx-devops) repo harness:
+
+- [geo](https://github.com/sofwerx/swx-devops/tree/master/local/geo)
+- [swx-gpu](https://github.com/sofwerx/swx-devops/tree/master/local/swx-gpu)
+
+This is deployed using `docker-compose`, with the `.yml` file appropriate for each environment:
+
+- [geo](geo.yml)
+- [swx-gpu](swx-gpu.yml)
+
+## Containers
+
+The [docker-compose.yml](docker-compose.yml) is used by the above environments.
+
+On a mac, with docker-engine installed as the default xhyve vm, you can:
+
+    docker-compose up
+
+Then open a browser to the orient port:
+
+    http://localhost:9999
+
+Open up one browser tab as an admin, and open three more browser tabs as drones, then click on the "Enable Triangulation" button.
 
 # Current plan:
 

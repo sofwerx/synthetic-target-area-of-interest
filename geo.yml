@@ -22,15 +22,34 @@ services:
     image: sofwerx/staoi:x86_64
     networks:
      - geo_default
+    labels:
+      - "traefik.backend=staoi"
+      - "traefik.port=8000"
+      - "traefik.frontend.rule=Host:${STAOI_HOST}"
+      - "traefik.frontend.passHostHeader=true"
+      - "traefik.frontend.entryPoints=http,https"
+    environment:
+      HOST: ${STAOI_HOST}
 
   orient:
     extends:
       file: docker-compose.yml
       service: orient
     environment:
+      PEER_CONFIG: "{'iceServers': [ { url: 'turn:user@turn.${DNS_DOMAIN}:3478', username: 'user', credential: '${TURN_PASSWORD}' } ]}"
       REFRESH_CONFIG: '{ triangulate: 2000 }'
+      OBJLOB_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}/GetObjectLoB/' }"
+      TRIANGULATE_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}/LocateTarget/' }"
+      PUSHCOT_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}/PushCoT/' }"
+      SECURE_PORT: 443
     networks:
      - geo_default
+    labels:
+      - "traefik.backend=orient"
+      - "traefik.port=9999"
+      - "traefik.frontend.rule=Host:${ORIENT_HOST}"
+      - "traefik.frontend.passHostHeader=true"
+      - "traefik.frontend.entryPoints=http,https"
 
   turn:
     extends:
@@ -40,4 +59,21 @@ services:
      - traefik-ssl:/ssl
     networks:
      - geo_default
+    environment:
+      PUBLIC_IP: ${PUBLIC_IP}
+      DNS_DOMAIN: ${DNS_DOMAIN}
+      JSON_CONFIG: "{\"config\":[\"verbose\",\"fingerprint\",\"lt-cred-mech\",\"user=user:${TURN_PASSWORD}\",\"realm=turn.${DNS_DOMAIN}\"]}"
+      TURNCREDENTIALS_SECRET: ${TURN_PASSWORD}
+    ports:
+      - "3478:3478/udp" # STUN/TURN UDP
+      - "3478:3478/tcp" # STUN/TURN TCP
+      - "3479:3479/udp" # STUN/TURN UDP Alt port (RFC5780 support)
+      - "3479:3479/tcp" # STUN/TURN TCP Alt port (RFC5780 support)
+      - "5349:5349/udp" # STUN/TURN DTLS
+      - "5349:5349/tcp" # STUN/TURN TLS
+      - "5350:5350/udp" # STUN/TURN DTLS Alt port (RFC5780 support)
+      - "5350:5350/tcp" # STUN/TURN TLS Alt port (RFC5780 support)
+      - "49152:49252/udp" # UDP media ports for TURN relay
+    labels:
+      - "traefik.enable=false"
 
