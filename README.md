@@ -50,7 +50,7 @@ The orient default landing page that lets any browser become either a drone or a
 
 #### drone.html
 
-The `drone.html` streams WebRTC video and telemetry data (location/orientation/heading) directly to the admin.
+The `drone.html` page streams WebRTC video and telemetry data (location/orientation/heading) directly to the admin.
 This is meant to be run on android mobile devices.
 When the admin tells it to with a "Update" message:
 - All drones will take a snapshot of the current video stream and post it to the staoi container's ObjectLoB web service.
@@ -58,7 +58,7 @@ When the admin tells it to with a "Update" message:
 
 #### admin.html
 
-The `admin.html` enumerates the drones in a web page, along with a map plotting their location.
+The `admin.html` page enumerates the drones in a web page, along with a map plotting their location.
 When "Enable Triangulate" is clicked, a periodic timestamped "Update" message is sent to all drones for them to submit photographs to the ObjectLoB web service.
 When a drone posts an "Updated" message back to the admin:
 - The admin waits for 3 or more drones to submit a message for any given timestamp.
