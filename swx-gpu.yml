@@ -6,9 +6,9 @@ volumes:
       name: "nvidia_driver_384.81"
 
 networks:
-  swx_default:
+  swxgpu_default:
     external:
-      name: swx_default
+      name: swxgpu_default
 
 services:
 
@@ -36,7 +36,7 @@ services:
       ATAK_IP: 172.18.0.1
       ATAK_PORT: 4242
     networks:
-      - swx_default
+      - swxgpu_default
 
   orient:
     extends:
@@ -45,7 +45,7 @@ services:
     environment:
       REFRESH_CONFIG: '{ triangulate: 500 }'
     networks:
-      - swx_default
+      - swxgpu_default
 
   turn:
     extends:
@@ -56,5 +56,5 @@ services:
       dockerfile: Dockerfile.ppc64le
     image: sofwerx/turn:ppc64le
     networks:
-      - swx_default
+      - swxgpu_default
 
