@@ -12,17 +12,11 @@ services:
     ports:
       - "8000:8000"
     environment:
-      HOST: ${HOST}
+      HOST: localhost
     logging:
       driver: json-file
       options:
         max-size: "20m"
-    labels:
-      - "traefik.backend=staoi"
-      - "traefik.port=8000"
-      - "traefik.frontend.rule=Host:${STAOI_HOST}"
-      - "traefik.frontend.passHostHeader=true"
-      - "traefik.frontend.entryPoints=http,https"
 
   orient:
     build: orient/
@@ -31,15 +25,14 @@ services:
     container_name: orient
     hostname: orient
     environment:
-      PEER_CONFIG: "{'iceServers': [ { url: 'turn:user@turn.${DNS_DOMAIN}:3478', username: 'user', credential: '${TURN_PASSWORD}' } ]}"
+      PEER_CONFIG: "{'iceServers': [ { url: 'turn:user@localhost:3478', username: 'user', credential: 'correcthorsebatterystaple' } ]}"
       NIFI_CONFIG: "{ enabled: false, url: '/nifi' }"
       STAOI_URL: "http://staoi:8000"
-      OBJLOB_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}/GetObjectLoB/' }"
-      TRIANGULATE_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}/LocateTarget/' }"
-      PUSHCOT_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}/PushCoT/' }"
+      OBJLOB_CONFIG: "{ enabled: true, url: 'http://localhost:8000/GetObjectLoB/' }"
+      TRIANGULATE_CONFIG: "{ enabled: true, url: 'http://localhost:8000/LocateTarget/' }"
+      PUSHCOT_CONFIG: "{ enabled: true, url: 'http://localhost:8000/PushCoT/' }"
       MEDIA_CONFIG: '{ audio: true, video: { width: { min: 640, max: 1920 }, height: { min: 480, max: 1080 }, frameRate: { ideal: 5 }, facingMode: { ideal: "environment" } } }'
       REFRESH_CONFIG: '{ triangulate: 2000 }'
-      SECURE_PORT: 443
       HTTP_PORT: 9999
     ports:
       - 9999:9999
@@ -47,12 +40,6 @@ services:
       driver: json-file
       options:
         max-size: "20m"
-    labels:
-      - "traefik.backend=orient"
-      - "traefik.port=9999"
-      - "traefik.frontend.rule=Host:${ORIENT_HOST}"
-      - "traefik.frontend.passHostHeader=true"
-      - "traefik.frontend.entryPoints=http,https"
 
   turn:
     container_name: turn
@@ -80,9 +67,9 @@ services:
       TLS_ALT_PORT: 5350
       MIN_PORT: 49152
       MAX_PORT: 49252
-      TURNCREDENTIALS_SECRET: ${TURN_PASSWORD}
+      TURNCREDENTIALS_SECRET: correcthorsebatterystaple
       DNS_DOMAIN: ${DNS_DOMAIN}
-      JSON_CONFIG: "{\"config\":[\"verbose\",\"fingerprint\",\"lt-cred-mech\",\"user=user:${TURN_PASSWORD}\",\"realm=turn.${DNS_DOMAIN}\"]}"
+      JSON_CONFIG: "{\"config\":[\"verbose\",\"fingerprint\",\"lt-cred-mech\",\"user=user:correcthorsebatterystaple\",\"realm=turn.${DNS_DOMAIN}\"]}"
       #WILDCARD_SSL_CA_CHAIN: ${WILDCARD_SSL_CA_CHAIN}
       #WILDCARD_SSL_PRIVATE_KEY: ${WILDCARD_SSL_PRIVATE_KEY}
       #WILDCARD_SSL_CERTIFICATE: ${WILDCARD_SSL_CERTIFICATE}
@@ -90,6 +77,4 @@ services:
       driver: json-file
       options:
         max-size: "20m"
-    labels:
-      - "traefik.enable=false"
 
