@@ -1,5 +1,7 @@
 # synthetic-target-area-of-interest
 
+[![Build Status](https://travis-ci.org/sofwerx/synthetic-target-area-of-interest.svg)](https://travis-ci.org/sofwerx/synthetic-target-area-of-interest)
+
 Identify and geolocate object(s) of interest using imagery and sensor data from multiple UAVs viewing a common target area, add / update corresponding feature on GIS map layer.
 
 This repository consists of nested git repositories as submodules. After doing a git pull, be sure to regularly run:
