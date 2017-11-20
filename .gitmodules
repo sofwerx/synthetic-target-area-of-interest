@@ -13,3 +13,6 @@
 [submodule "lib/swx/cot"]
 	path = lib/swx/cot
 	url = https://github.com/sofwerx/push-cursor-on-target
+[submodule "lib/swx/geopackage-python"]
+	path = lib/swx/geopackage-python
+	url = git@github.com:sofwerx/geopackage-python.git
