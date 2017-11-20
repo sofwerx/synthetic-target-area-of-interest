@@ -16,3 +16,6 @@
 [submodule "lib/swx/geopackage-python"]
 	path = lib/swx/geopackage-python
 	url = git@github.com:sofwerx/geopackage-python.git
+[submodule "lib/swx/geopackage_python"]
+	path = lib/swx/geopackage_python
+	url = git@github.com:sofwerx/geopackage_python.git
