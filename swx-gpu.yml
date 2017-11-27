@@ -55,7 +55,7 @@ services:
       service: orient
     environment:
       PEER_CONFIG: "{'iceServers': [ { url: 'turn:user@turn.${DNS_DOMAIN}:3478', username: 'user', credential: '${TURN_PASSWORD}' } ]}"
-      REFRESH_CONFIG: '{ triangulate: 500 }'
+      REFRESH_CONFIG: '{ triangulate: 1000 }'
       OBJLOB_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}/GetObjectLoB/' }"
       TRIANGULATE_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}/LocateTarget/' }"
       PUSHCOT_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}/PushCoT/' }"
