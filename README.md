@@ -1,6 +1,7 @@
 # synthetic-target-area-of-interest
 
 [![Build Status](https://travis-ci.org/sofwerx/synthetic-target-area-of-interest.svg)](https://travis-ci.org/sofwerx/synthetic-target-area-of-interest)
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/sofwerx/synthetic-target-area-of-interest.svg?columns=all)](https://waffle.io/sofwerx/synthetic-target-area-of-interest)
 
 Identify and geolocate object(s) of interest using imagery and sensor data from multiple UAVs viewing a common target area, add / update corresponding feature on GIS map layer.
 
