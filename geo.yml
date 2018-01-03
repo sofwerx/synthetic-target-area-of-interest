@@ -30,13 +30,16 @@ services:
       - "traefik.frontend.entryPoints=http,https"
     environment:
       HOST: ${STAOI_HOST}
+      ATAK_IP: 192.168.1.160
+      ATAK_PORT: 4242
+      ATAK_PROTO: UDP
 
   orient:
     extends:
       file: docker-compose.yml
       service: orient
     environment:
-      PEER_CONFIG: "{'iceServers': [ { url: 'turn:user@turn.${DNS_DOMAIN}:3478', username: 'user', credential: '${TURN_PASSWORD}' } ]}"
+      PEER_CONFIG: "{'iceServers': [ { url: 'turn:user@192.168.1.153:3478', username: 'user', credential: '${TURN_PASSWORD}' } ]}"
       REFRESH_CONFIG: '{ triangulate: 2000 }'
       OBJLOB_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}:8443/GetObjectLoB/' }"
       TRIANGULATE_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}:8443/LocateTarget/' }"
