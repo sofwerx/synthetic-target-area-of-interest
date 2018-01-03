@@ -38,10 +38,10 @@ services:
     environment:
       PEER_CONFIG: "{'iceServers': [ { url: 'turn:user@turn.${DNS_DOMAIN}:3478', username: 'user', credential: '${TURN_PASSWORD}' } ]}"
       REFRESH_CONFIG: '{ triangulate: 2000 }'
-      OBJLOB_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}/GetObjectLoB/' }"
-      TRIANGULATE_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}/LocateTarget/' }"
-      PUSHCOT_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}/PushCoT/' }"
-      SECURE_PORT: 443
+      OBJLOB_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}:8443/GetObjectLoB/' }"
+      TRIANGULATE_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}:8443/LocateTarget/' }"
+      PUSHCOT_CONFIG: "{ enabled: true, url: 'https://${STAOI_HOST}:8443/PushCoT/' }"
+      SECURE_PORT: 8443
     networks:
      - geo_default
     labels:
